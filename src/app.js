@@ -1,27 +1,33 @@
 const { Sequelize } = require('sequelize');
-const { cli } = require('@caporal/core');
+const { program } = require('@caporal/core');
 
 const conn = new Sequelize('tes', 'root', '', {
     host: 'localhost',
     dialect: 'mysql'
   });
 
-  const Data = conn.define('data', {
-    id: Sequelize.INTEGER,
-    act: Sequelize.STRING,
-    stat: Sequelize.STRING
+  const Data = conn.define("data", {
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+    },
+    act: {
+      type: Sequelize.STRING,
+    },
+    stat: {
+      type: Sequelize.STRING,
+    },
   });
 
-cli  
+  program
   .action(() => {
-    (async () => {
-    let todolist = await data.findAll({ raw: true });
-            todolist.forEach(data => {
-                console.log(`${this.id}. ${this.act}. (${this.stat})`)
-            })
+      (async () => {
+          let data = await Data.findAll({ raw: true });
+          data.forEach(data => {
+              console.log(`${data.id}. ${data.act}. ${data.stat}`)
+          })
             conn.close();
-        })()
-    }
-  )
+      })()
+  })
 
-    cli.run();
+  program.run();
