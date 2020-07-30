@@ -1,0 +1,9 @@
+node_modules
+.action((args) => {
+        const addItem = List.build({ item: args.item });
+        addItem.save().then(() => {
+            console.log('new list saved')
+        }).finally(() => {
+            koneksi.close();
+        });
+    })

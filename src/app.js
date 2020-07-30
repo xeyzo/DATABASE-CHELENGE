@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-const { CLI } = require('@caporal/core');
+const { cli } = require('@caporal/core');
 
 const conn = new Sequelize('tes', 'root', '', {
     host: 'localhost',
@@ -7,15 +7,15 @@ const conn = new Sequelize('tes', 'root', '', {
   });
 
   const Data = conn.define('data', {
-    id : Sequelize.INTEGER,
-    act: Sequelize.VARCHAR,
-    stat: Sequelize.VARCHAR
+    id: Sequelize.INTEGER,
+    act: Sequelize.STRING,
+    stat: Sequelize.STRING
   });
 
-CLI  
+cli  
   .action(() => {
     (async () => {
-    let todolist = await tes.findAll({ raw: true });
+    let todolist = await data.findAll({ raw: true });
             todolist.forEach(data => {
                 console.log(`${this.id}. ${this.act}. (${this.stat})`)
             })
@@ -24,4 +24,4 @@ CLI
     }
   )
 
-    CLI.run();
+    cli.run();
